@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 th:text="${something}"/>
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Code</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    <form class="ui form" th:action="@{/products}" method="post" th:object="${orderForm}">
+        <ul>
+            <tr th:each="product : ${productList}">
+                <td>
+                    <a th:href="@{/deleteProduct(id=${product.barcode})}" class="btn btn-danger">Remove</a>
+                </td>
+                <td th:text="${product.barcode}"/>
+                <td th:text="${product.name}"/>
+                <td th:text="${product.description}"/>
+
+                <td>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="barcode" th:value="${product.barcode}"/>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input type="number" name="quantity" value=""/>
+                    </div>
+                </td>
+            </tr>
+        </ul>
+        <th>
+
+            <div class="field">
+                <button class="ui button" type="submit" >Checkout</button>
+            </div>
+        </th>
+    </form>
+    </tbody>
+</table>
+
+</body>
+</html>
